@@ -19,3 +19,7 @@ InMemDataBase/CMakeFiles/InMemDataBase.dir/src/log.c.o
  InMemDataBase/inc/colors.h
  InMemDataBase/inc/global.h
  InMemDataBase/inc/log.h
+InMemDataBase/CMakeFiles/InMemDataBase.dir/src/node.c.o
+ /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/src/node.c
+ InMemDataBase/inc/global.h
+ InMemDataBase/inc/node.h

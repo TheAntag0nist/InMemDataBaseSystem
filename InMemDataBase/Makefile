@@ -206,6 +206,33 @@ src/log.c.s:
 	cd /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem && $(MAKE) -f InMemDataBase/CMakeFiles/InMemDataBase.dir/build.make InMemDataBase/CMakeFiles/InMemDataBase.dir/src/log.c.s
 .PHONY : src/log.c.s
 
+src/node.o: src/node.c.o
+
+.PHONY : src/node.o
+
+# target to build an object file
+src/node.c.o:
+	cd /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem && $(MAKE) -f InMemDataBase/CMakeFiles/InMemDataBase.dir/build.make InMemDataBase/CMakeFiles/InMemDataBase.dir/src/node.c.o
+.PHONY : src/node.c.o
+
+src/node.i: src/node.c.i
+
+.PHONY : src/node.i
+
+# target to preprocess a source file
+src/node.c.i:
+	cd /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem && $(MAKE) -f InMemDataBase/CMakeFiles/InMemDataBase.dir/build.make InMemDataBase/CMakeFiles/InMemDataBase.dir/src/node.c.i
+.PHONY : src/node.c.i
+
+src/node.s: src/node.c.s
+
+.PHONY : src/node.s
+
+# target to generate assembly for a file
+src/node.c.s:
+	cd /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem && $(MAKE) -f InMemDataBase/CMakeFiles/InMemDataBase.dir/build.make InMemDataBase/CMakeFiles/InMemDataBase.dir/src/node.c.s
+.PHONY : src/node.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -224,6 +251,9 @@ help:
 	@echo "... src/log.o"
 	@echo "... src/log.i"
 	@echo "... src/log.s"
+	@echo "... src/node.o"
+	@echo "... src/node.i"
+	@echo "... src/node.s"
 .PHONY : help
 
 

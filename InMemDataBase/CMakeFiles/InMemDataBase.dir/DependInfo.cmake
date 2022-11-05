@@ -7,6 +7,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/src/core.c" "/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core.c.o"
   "/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/src/core_db.c" "/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core_db.c.o"
   "/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/src/log.c" "/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/CMakeFiles/InMemDataBase.dir/src/log.c.o"
+  "/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/src/node.c" "/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/CMakeFiles/InMemDataBase.dir/src/node.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

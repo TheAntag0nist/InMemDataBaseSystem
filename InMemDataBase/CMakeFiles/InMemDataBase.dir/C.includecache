@@ -39,6 +39,8 @@ sys/ipc.h
 -
 sys/shm.h
 -
+sys/sem.h
+-
 
 InMemDataBase/inc/log.h
 global.h

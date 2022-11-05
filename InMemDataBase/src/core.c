@@ -10,7 +10,11 @@ int create_db(db_context* context, char* name, int uid) {
 }
 
 int save_db(db_context* context, char* path) {
-    return SUCCESS;
+    return core_save_db(context, path);
+}
+
+int load_db(db_context* context, char* path){
+    return core_load_db(context, path);
 }
 
 int disconnect_db(){

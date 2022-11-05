@@ -83,9 +83,22 @@ InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/InMemDataBase.dir/src/core.c.s"
 	cd /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/src/core.c -o CMakeFiles/InMemDataBase.dir/src/core.c.s
 
+InMemDataBase/CMakeFiles/InMemDataBase.dir/src/node.c.o: InMemDataBase/CMakeFiles/InMemDataBase.dir/flags.make
+InMemDataBase/CMakeFiles/InMemDataBase.dir/src/node.c.o: InMemDataBase/src/node.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object InMemDataBase/CMakeFiles/InMemDataBase.dir/src/node.c.o"
+	cd /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/InMemDataBase.dir/src/node.c.o   -c /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/src/node.c
+
+InMemDataBase/CMakeFiles/InMemDataBase.dir/src/node.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/InMemDataBase.dir/src/node.c.i"
+	cd /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/src/node.c > CMakeFiles/InMemDataBase.dir/src/node.c.i
+
+InMemDataBase/CMakeFiles/InMemDataBase.dir/src/node.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/InMemDataBase.dir/src/node.c.s"
+	cd /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/src/node.c -o CMakeFiles/InMemDataBase.dir/src/node.c.s
+
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/log.c.o: InMemDataBase/CMakeFiles/InMemDataBase.dir/flags.make
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/log.c.o: InMemDataBase/src/log.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object InMemDataBase/CMakeFiles/InMemDataBase.dir/src/log.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object InMemDataBase/CMakeFiles/InMemDataBase.dir/src/log.c.o"
 	cd /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/InMemDataBase.dir/src/log.c.o   -c /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/src/log.c
 
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/log.c.i: cmake_force
@@ -100,6 +113,7 @@ InMemDataBase/CMakeFiles/InMemDataBase.dir/src/log.c.s: cmake_force
 InMemDataBase_OBJECTS = \
 "CMakeFiles/InMemDataBase.dir/src/core_db.c.o" \
 "CMakeFiles/InMemDataBase.dir/src/core.c.o" \
+"CMakeFiles/InMemDataBase.dir/src/node.c.o" \
 "CMakeFiles/InMemDataBase.dir/src/log.c.o"
 
 # External object files for target InMemDataBase
@@ -107,10 +121,11 @@ InMemDataBase_EXTERNAL_OBJECTS =
 
 InMemDataBase/libInMemDataBase.a: InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core_db.c.o
 InMemDataBase/libInMemDataBase.a: InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core.c.o
+InMemDataBase/libInMemDataBase.a: InMemDataBase/CMakeFiles/InMemDataBase.dir/src/node.c.o
 InMemDataBase/libInMemDataBase.a: InMemDataBase/CMakeFiles/InMemDataBase.dir/src/log.c.o
 InMemDataBase/libInMemDataBase.a: InMemDataBase/CMakeFiles/InMemDataBase.dir/build.make
 InMemDataBase/libInMemDataBase.a: InMemDataBase/CMakeFiles/InMemDataBase.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C static library libInMemDataBase.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C static library libInMemDataBase.a"
 	cd /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase && $(CMAKE_COMMAND) -P CMakeFiles/InMemDataBase.dir/cmake_clean_target.cmake
 	cd /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/InMemDataBase.dir/link.txt --verbose=$(VERBOSE)
 

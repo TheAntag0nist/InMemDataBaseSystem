@@ -7,6 +7,7 @@
 // Data Base Context functions 
 int create_db(db_context* context, char* name, int uid);
 int save_db(db_context* context, char* path);
+int load_db(db_context* context, char* path);
 int destroy_db(db_context* context);
 
 // Data Base Connection functions

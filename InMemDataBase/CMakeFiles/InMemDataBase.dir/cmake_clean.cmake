@@ -2,6 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/InMemDataBase.dir/src/core.c.o"
   "CMakeFiles/InMemDataBase.dir/src/core_db.c.o"
   "CMakeFiles/InMemDataBase.dir/src/log.c.o"
+  "CMakeFiles/InMemDataBase.dir/src/node.c.o"
   "libInMemDataBase.a"
   "libInMemDataBase.pdb"
 )
