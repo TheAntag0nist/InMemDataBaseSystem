@@ -1,0 +1,2 @@
+/usr/bin/ar qc libInMemDataBase.a  CMakeFiles/InMemDataBase.dir/src/core_db.c.o CMakeFiles/InMemDataBase.dir/src/core.c.o CMakeFiles/InMemDataBase.dir/src/log.c.o
+/usr/bin/ranlib libInMemDataBase.a

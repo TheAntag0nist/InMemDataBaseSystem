@@ -1,0 +1,1 @@
+/usr/bin/cc    CMakeFiles/Sandbox.dir/src/main.c.o  -o ../bin/Sandbox  ../InMemDataBase/libInMemDataBase.a 

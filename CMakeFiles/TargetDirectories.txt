@@ -1,0 +1,8 @@
+/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/CMakeFiles/rebuild_cache.dir
+/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/CMakeFiles/edit_cache.dir
+/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/CMakeFiles/rebuild_cache.dir
+/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/CMakeFiles/edit_cache.dir
+/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/CMakeFiles/InMemDataBase.dir
+/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/Sandbox/CMakeFiles/rebuild_cache.dir
+/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/Sandbox/CMakeFiles/edit_cache.dir
+/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/Sandbox/CMakeFiles/Sandbox.dir
