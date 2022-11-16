@@ -7,7 +7,7 @@ db_context create_db_context(char* db_name, int db_uid){
     context.db_shm_id = core_create_db_shm(db_name, db_uid);
 
     // 2. Get database semaphore id
-    context.db_sem_id = core_create_db_sem(db_name, 1);
+    // context.db_sem_id = core_create_db_sem(db_name, 1);
 
     // 3. Save size    
     context.db_size = DEFAULT_DB_SIZE;
@@ -17,11 +17,56 @@ db_context create_db_context(char* db_name, int db_uid){
 
     // 5. Save database name
     int name_sz = strlen(db_name);
-    context.db_name = (char*) malloc(name_sz);
+    context.db_name = (char*) malloc(name_sz + 1);
     strncpy(context.db_name, db_name, name_sz);
+    context.db_name[name_sz] = '\0';
 
     // 6. Return database context
     return context;
+}
+
+int core_connect_db(char* db_name, int db_uid, db_context* db_context){
+    // 1. Get database shared memory id
+    db_context->db_shm_id = core_create_db_shm(db_name, db_uid);
+    if(db_context->db_shm_id == IPC_FAIL){
+        error("Can't connect to database");
+        return FAILURE;
+    }
+
+    // 2. Get database semaphore id
+    // context.db_sem_id = core_create_db_sem(db_name, 1);
+
+    // 3.Get and Save size
+
+    // 4. Set mem pointer to memory
+    db_context->mem_ptr = NULL;
+
+    // 5. Save database name
+    int name_sz = strlen(db_name);
+    db_context->db_name = (char*) malloc(name_sz + 1);
+    strncpy(db_context->db_name, db_name, name_sz);
+    db_context->db_name[name_sz] = '\0';
+    return SUCCESS;
+}
+
+int core_connect_db_sem(char* db_name, int db_uid){
+    // TODO: include Semaphore Core from another project
+}
+
+int core_connect_db_shm(char* db_name, int db_uid){
+    // 1. Create unique key
+    key_t key = ftok(db_name, db_uid);
+
+    // 2. Create shared memory 
+    int shm_id = shmget(key, DEFAULT_DB_SIZE, IPC_EXCL | IPC_CREAT | 0666);
+
+    // 3. Check id
+    if(shm_id == IPC_FAIL)
+        fatal("Can't connect SHM for DB");
+    info("SHM for DB was created"); 
+
+    // 4. Return value
+    return shm_id;
 }
 
 int core_create_db_shm(char* db_name, int db_uid){
@@ -84,6 +129,7 @@ int core_save_db(db_context* db_context, char* save_path){
     // 3. Begin transaction
     if(core_attach_db(db_context) == SUCCESS) {
         // 4. Write database to file
+        info("Save DB to FL");
         int wr_blocks = fwrite(db_context->mem_ptr, db_context->db_size, 1, file);
         if(wr_blocks != SUCCESS){
             error("Can't write DB to FL");
@@ -92,9 +138,12 @@ int core_save_db(db_context* db_context, char* save_path){
 
         // 5. End transaction
         core_detach_db(db_context);
+        info("DB was saved to FL");
     }
-    else
+    else{
+        error("Not save DB to FL");
         result = FAILURE;
+    }
 
     // 6. Close file
     fclose(file);
@@ -155,7 +204,7 @@ int core_attach_db(db_context* db_context){
         // 2. Display message
         if(db_context->mem_ptr == (void*) IPC_FAIL)
             fatal("Can't attach shared memory of DB");
-        info("Successfully attached SHM of DB");
+        info("[+] SHM was attached");
     }
     else{
         // 3. On error
@@ -173,7 +222,7 @@ int core_detach_db(db_context* db_context){
         // 2. Display message
         if(res == IPC_FAIL)
             fatal("Can't detach SHM");
-        info("SHM was detached");
+        info("[-] SHM was detached");
         // 3. Set ptr to NULL
         db_context->mem_ptr = NULL;
     }
@@ -188,31 +237,38 @@ int core_detach_db(db_context* db_context){
 
 int core_write_db(db_context* db_context, char* data){
     // 1. Attach database
-    core_attach_db(db_context);
+    if (core_attach_db(db_context) == SUCCESS) {
+        // 2. Get data
+        int mem_sz = db_context->db_size;
+        char* ptr = db_context->mem_ptr;
+        int data_sz = strlen(data);
 
-    // 2. Get data
-    int mem_sz = db_context->db_size;
-    char* ptr = db_context->mem_ptr;
-    int data_sz = strlen(data);
+        // 3. Copy data to memory
+        info("Write data to DB");
+        if(data_sz < mem_sz)
+            memcpy(ptr, data, data_sz);
+        else
+            memcpy(ptr, data, mem_sz);
 
-    // 3. Copy data to memory
-    if(data_sz < mem_sz)
-        memcpy(ptr, data, data_sz);
-    else
-        memcpy(ptr, data, mem_sz);
+        // 4. End transaction
+        core_detach_db(db_context);
+    }
+    else {
+        error("Can't write to DB");
+        return FAILURE;
+    }
 
-    // 4. End transaction
-    core_detach_db(db_context);
     return SUCCESS;
 }
 
 int core_read_db(db_context* db_context, char* data){
     // 1. Attach database
-    core_attach_db(db_context);
+    if (core_attach_db(db_context) == SUCCESS) {
+        // Some actions
     
-    // Some actions
+        // 2. Detach database
+        core_detach_db(db_context);
+    }
 
-    // 2. Detach database
-    core_detach_db(db_context);
     return SUCCESS;
 }

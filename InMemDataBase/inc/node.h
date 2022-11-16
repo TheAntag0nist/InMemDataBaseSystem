@@ -14,10 +14,10 @@ typedef struct node {
     nd_list* head_list;
 } nd;
 
-// 2. Node list structure
+// 2. Universal node list structure
 typedef struct node_list{
-    nd* node_data;
     nd_list* next_node;
+    void* node_data;
 } nd_list;
 
 // 3. All nodes in graph
