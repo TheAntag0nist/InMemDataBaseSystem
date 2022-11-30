@@ -140,12 +140,12 @@ InMemDataBase/CMakeFiles/InMemDataBase.dir/clean:
 Sandbox/CMakeFiles/Sandbox.dir/all: InMemDataBase/CMakeFiles/InMemDataBase.dir/all
 	$(MAKE) -f Sandbox/CMakeFiles/Sandbox.dir/build.make Sandbox/CMakeFiles/Sandbox.dir/depend
 	$(MAKE) -f Sandbox/CMakeFiles/Sandbox.dir/build.make Sandbox/CMakeFiles/Sandbox.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/CMakeFiles --progress-num=6,7 "Built target Sandbox"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/CMakeFiles --progress-num=6,7,8 "Built target Sandbox"
 .PHONY : Sandbox/CMakeFiles/Sandbox.dir/all
 
 # Build rule for subdir invocation for target.
 Sandbox/CMakeFiles/Sandbox.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/CMakeFiles 8
 	$(MAKE) -f CMakeFiles/Makefile2 Sandbox/CMakeFiles/Sandbox.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/CMakeFiles 0
 .PHONY : Sandbox/CMakeFiles/Sandbox.dir/rule

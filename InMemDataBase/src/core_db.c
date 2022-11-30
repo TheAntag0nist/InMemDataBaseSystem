@@ -7,6 +7,7 @@ db_context create_db_context(char* db_name, int db_uid){
     context.db_shm_id = core_create_db_shm(db_name, db_uid);
 
     // 2. Get database semaphore id
+    // TODO: include Semaphore Core from another project
     // context.db_sem_id = core_create_db_sem(db_name, 1);
 
     // 3. Save size    
@@ -34,6 +35,7 @@ int core_connect_db(char* db_name, int db_uid, db_context* db_context){
     }
 
     // 2. Get database semaphore id
+    // TODO: include Semaphore Core from another project
     // context.db_sem_id = core_create_db_sem(db_name, 1);
 
     // 3.Get and Save size
@@ -79,7 +81,7 @@ int core_create_db_shm(char* db_name, int db_uid){
     // 3. Check id
     if(shm_id == IPC_FAIL)
         fatal("Can't create SHM for DB");
-    info("SHM for DB was created"); 
+    info("SHM for DB was created/connected"); 
 
     // 4. Return value
     return shm_id;
@@ -117,6 +119,7 @@ int core_save_db(db_context* db_context, char* save_path){
     int shm_id = db_context->db_shm_id;
 
     // 1. Create file
+    printf("FILE_PATH: %s\n", save_path);
     FILE* file = fopen(save_path, "wb");
     int result = SUCCESS;
 
@@ -133,6 +136,7 @@ int core_save_db(db_context* db_context, char* save_path){
         int wr_blocks = fwrite(db_context->mem_ptr, db_context->db_size, 1, file);
         if(wr_blocks != SUCCESS){
             error("Can't write DB to FL");
+            core_detach_db(db_context);
             return FAILURE;
         }
 
@@ -190,7 +194,7 @@ int core_destroy_db(db_context* db_context){
     free(db_context->db_name);
 
     // 3. Display message
-    info("SEM for DB was destroyed");
+    info("DB was destroyed");
 
     // 4. Return result
     return SUCCESS;

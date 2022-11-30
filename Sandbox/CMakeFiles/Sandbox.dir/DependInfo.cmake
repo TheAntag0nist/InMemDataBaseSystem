@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/Sandbox/src/cmd.c" "/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/Sandbox/CMakeFiles/Sandbox.dir/src/cmd.c.o"
   "/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/Sandbox/src/main.c" "/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/Sandbox/CMakeFiles/Sandbox.dir/src/main.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")

@@ -17,12 +17,12 @@ int load_db(db_context* context, char* path){
     return core_load_db(context, path);
 }
 
-int disconnect_db(){
-    return SUCCESS;
+int disconnect_db(db_context* context){
+    return core_destroy_db(context);
 }
 
-int connect_db(){
-    return SUCCESS;
+int connect_db(db_context* db_context, char* db_name, int db_uid){
+    return core_connect_db(db_name, db_uid, db_context);
 }
 
 int search(){

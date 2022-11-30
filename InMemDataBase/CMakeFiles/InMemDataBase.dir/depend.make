@@ -20,6 +20,8 @@ InMemDataBase/CMakeFiles/InMemDataBase.dir/src/log.c.o: InMemDataBase/inc/global
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/log.c.o: InMemDataBase/inc/log.h
 
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/node.c.o: InMemDataBase/src/node.c
+InMemDataBase/CMakeFiles/InMemDataBase.dir/src/node.c.o: InMemDataBase/inc/colors.h
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/node.c.o: InMemDataBase/inc/global.h
+InMemDataBase/CMakeFiles/InMemDataBase.dir/src/node.c.o: InMemDataBase/inc/log.h
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/node.c.o: InMemDataBase/inc/node.h
 

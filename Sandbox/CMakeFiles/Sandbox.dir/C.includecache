@@ -6,11 +6,17 @@
 
 #IncludeRegexTransform: 
 
+/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/Sandbox/src/cmd.c
+cmd.h
+-
+
 /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/Sandbox/src/main.c
 stdio.h
 /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/Sandbox/src/stdio.h
 core.h
 /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/Sandbox/src/core.h
+cmd.h
+/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/Sandbox/src/cmd.h
 
 InMemDataBase/inc/colors.h
 stdio.h
@@ -57,4 +63,12 @@ global.h
 -
 colors.h
 -
+
+Sandbox/inc/cmd.h
+global.h
+Sandbox/inc/global.h
+core.h
+Sandbox/inc/core.h
+log.h
+Sandbox/inc/log.h
 

@@ -13,6 +13,8 @@
 #include <sys/sem.h>
 
 #define DEFAULT_DB_SIZE 1024
+#define COMMAND_SIZE 512
+#define TEMP_SIZE 128
 
 #define TRUE 1
 #define FALSE 0

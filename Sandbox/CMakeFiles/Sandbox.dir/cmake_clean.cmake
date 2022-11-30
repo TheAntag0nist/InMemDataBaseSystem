@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "../bin/Sandbox"
   "../bin/Sandbox.pdb"
+  "CMakeFiles/Sandbox.dir/src/cmd.c.o"
   "CMakeFiles/Sandbox.dir/src/main.c.o"
 )
 
