@@ -6,35 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/src/core.c
-core.h
--
-
-/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/src/core_db.c
-core_db.h
--
-
-/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/src/node.c
-node.h
--
+/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/src/log.c
+log.h
+/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/src/log.h
 
 InMemDataBase/inc/colors.h
 stdio.h
 InMemDataBase/inc/stdio.h
-
-InMemDataBase/inc/core.h
-core_db.h
--
-global.h
--
-log.h
--
-
-InMemDataBase/inc/core_db.h
-global.h
--
-log.h
--
 
 InMemDataBase/inc/global.h
 malloc.h
@@ -62,11 +40,5 @@ InMemDataBase/inc/log.h
 global.h
 -
 colors.h
--
-
-InMemDataBase/inc/node.h
-global.h
--
-log.h
 -
 

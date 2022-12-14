@@ -9,16 +9,26 @@ char temp[TEMP_SIZE];
 
 // 1. Global database context
 static char flag_db_enabled = false;
+static char flag_db_server = false;
 db_context context;
 
-void help();
 void main_loop();
-void create_node();
-void open_database();
-void create_database();
-void display_node();
-void delete_node();
-void link_node();
-void save_db_cmd();
+// 0. Global commands
+void get_system_info();
+void help();
+
+// 1. Database functions
+void create_database_cmd();
+void open_database_cmd();
+void save_database_cmd();
+
+// 2. Node functions
+void get_near_nodes_cmd();
+void display_node_cmd();
+void create_node_cmd();
+void delete_node_cmd();
+void link_node_cmd();
+void find_node_cmd();
+
 
 #endif

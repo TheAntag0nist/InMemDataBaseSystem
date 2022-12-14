@@ -15,7 +15,7 @@ nd* create_node(){
     nd* init_nd = malloc(sizeof(nd));
     // 2. Write data
     init_nd->node_id = node_counter;
-    init_nd->data_type = 0;
+    init_nd->data_type = ND_TYPE_DEFAULT;
     init_nd->data = NULL;
     ++node_counter;
     // 3. Return node
@@ -25,28 +25,26 @@ nd* create_node(){
 int display_node(nd* node){
     // 1. Allocate memory
     char* global_str = malloc(node->data_sz + 512);
-    char* data_str = malloc(node->data_sz + 1);
     char temp[128];
     char* ptr;
-    // 2. Configure string
-    for(int i = 0; i < node->data_sz; ++i)
-        data_str[i] = ((char*)node->data)[i];
-    data_str[node->data_sz] = '\0';
     // 3. Write data to global string
-    strcpy(global_str, "ID: ");
+    strcpy(global_str, "\nID: ");
+    itoa(node->node_id, temp);
+    strcat(global_str, temp);
     strcat(global_str, "\n");
 
-    strcpy(global_str, "DATA: ");
-    strcat(global_str, data_str);
+    strcat(global_str, "DATA: ");
+    strcat(global_str, node->data);
     strcat(global_str, "\n");
 
-    strcpy(global_str, "TYPE: ");
+    strcat(global_str, "TYPE: ");
+    itoa(node->data_type, temp);
+    strcat(global_str, temp);
     strcat(global_str, "\n");
     // 4. Display string
     info(global_str);
     // 5. Return result
     free(global_str);
-    free(data_str);
     return SUCCESS;   
 }
 
@@ -61,3 +59,32 @@ char* serialize_node(nd* node){
 
     return buf;
 }
+
+
+void itoa(int n, char s[]){
+    int i, sign;
+ 
+    if ((sign = n) < 0)  /* записываем знак */
+        n = -n;          /* делаем n положительным числом */
+    i = 0;
+    do {       /* генерируем цифры в обратном порядке */
+        s[i++] = n % 10 + '0';   /* берем следующую цифру */
+    } while ((n /= 10) > 0);     /* удаляем */
+    if (sign < 0)
+        s[i++] = '-';
+    s[i] = '\0';
+    reverse(s);
+}
+
+ /* reverse:  переворачиваем строку s на месте */
+ void reverse(char s[])
+ {
+     int i, j;
+     char c;
+ 
+     for (i = 0, j = strlen(s)-1; i<j; i++, j--) {
+         c = s[i];
+         s[i] = s[j];
+         s[j] = c;
+     }
+ }

@@ -7,12 +7,14 @@ InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core.c.o: InMemDataBase/inc/core.
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core.c.o: InMemDataBase/inc/core_db.h
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core.c.o: InMemDataBase/inc/global.h
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core.c.o: InMemDataBase/inc/log.h
+InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core.c.o: InMemDataBase/inc/node.h
 
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core_db.c.o: InMemDataBase/src/core_db.c
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core_db.c.o: InMemDataBase/inc/colors.h
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core_db.c.o: InMemDataBase/inc/core_db.h
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core_db.c.o: InMemDataBase/inc/global.h
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core_db.c.o: InMemDataBase/inc/log.h
+InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core_db.c.o: InMemDataBase/inc/node.h
 
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/log.c.o: InMemDataBase/src/log.c
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/log.c.o: InMemDataBase/inc/colors.h

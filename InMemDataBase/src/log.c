@@ -143,3 +143,7 @@ void inner_error(){
     
     printf("last_error = %d\n", errno);
 }
+
+char *time_to_ascii(const time_t time){
+    return ctime(&time);
+}

@@ -7,6 +7,7 @@ Sandbox/CMakeFiles/Sandbox.dir/src/cmd.c.o: InMemDataBase/inc/core.h
 Sandbox/CMakeFiles/Sandbox.dir/src/cmd.c.o: InMemDataBase/inc/core_db.h
 Sandbox/CMakeFiles/Sandbox.dir/src/cmd.c.o: InMemDataBase/inc/global.h
 Sandbox/CMakeFiles/Sandbox.dir/src/cmd.c.o: InMemDataBase/inc/log.h
+Sandbox/CMakeFiles/Sandbox.dir/src/cmd.c.o: InMemDataBase/inc/node.h
 Sandbox/CMakeFiles/Sandbox.dir/src/cmd.c.o: Sandbox/inc/cmd.h
 
 Sandbox/CMakeFiles/Sandbox.dir/src/main.c.o: Sandbox/src/main.c
@@ -15,5 +16,6 @@ Sandbox/CMakeFiles/Sandbox.dir/src/main.c.o: InMemDataBase/inc/core.h
 Sandbox/CMakeFiles/Sandbox.dir/src/main.c.o: InMemDataBase/inc/core_db.h
 Sandbox/CMakeFiles/Sandbox.dir/src/main.c.o: InMemDataBase/inc/global.h
 Sandbox/CMakeFiles/Sandbox.dir/src/main.c.o: InMemDataBase/inc/log.h
+Sandbox/CMakeFiles/Sandbox.dir/src/main.c.o: InMemDataBase/inc/node.h
 Sandbox/CMakeFiles/Sandbox.dir/src/main.c.o: Sandbox/inc/cmd.h
 

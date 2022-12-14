@@ -22,26 +22,24 @@ db_context create_db_context(char* db_name, int db_uid){
     strncpy(context.db_name, db_name, name_sz);
     context.db_name[name_sz] = '\0';
 
+    core_init_sys_info(&context);
     // 6. Return database context
     return context;
 }
 
 int core_connect_db(char* db_name, int db_uid, db_context* db_context){
-    // 1. Get database shared memory id
-    db_context->db_shm_id = core_create_db_shm(db_name, db_uid);
-    if(db_context->db_shm_id == IPC_FAIL){
-        error("Can't connect to database");
+    key_t key = ftok(db_name, db_uid);
+    printf("KEY: %d\n", key);
+
+    int shm_id = shmget(key, 0, 0666);
+    if(shm_id == IPC_FAIL){
+        error("DATABASE not exist");
         return FAILURE;
     }
 
-    // 2. Get database semaphore id
-    // TODO: include Semaphore Core from another project
-    // context.db_sem_id = core_create_db_sem(db_name, 1);
-
-    // 3.Get and Save size
-
     // 4. Set mem pointer to memory
     db_context->mem_ptr = NULL;
+    db_context->db_shm_id = shm_id;
 
     // 5. Save database name
     int name_sz = strlen(db_name);
@@ -55,25 +53,28 @@ int core_connect_db_sem(char* db_name, int db_uid){
     // TODO: include Semaphore Core from another project
 }
 
-int core_connect_db_shm(char* db_name, int db_uid){
+int core_is_exist_db_shm(char* db_name, int db_uid){
     // 1. Create unique key
     key_t key = ftok(db_name, db_uid);
 
-    // 2. Create shared memory 
-    int shm_id = shmget(key, DEFAULT_DB_SIZE, IPC_EXCL | IPC_CREAT | 0666);
+    info("Is database already exist?");
+    
+    int shm_id = shmget(key, DEFAULT_DB_SIZE, 0666);
 
-    // 3. Check id
-    if(shm_id == IPC_FAIL)
-        fatal("Can't connect SHM for DB");
-    info("SHM for DB was created"); 
-
-    // 4. Return value
-    return shm_id;
+    if(shm_id == IPC_FAIL){
+        info("YES");
+        return true;
+    }
+    else{
+        info("NO");
+        return false;
+    }
 }
 
 int core_create_db_shm(char* db_name, int db_uid){
     // 1. Create unique key
     key_t key = ftok(db_name, db_uid);
+    printf("KEY: %d\n", key);
 
     // 2. Create shared memory 
     int shm_id = shmget(key, DEFAULT_DB_SIZE, IPC_CREAT | 0666);
@@ -114,6 +115,7 @@ int core_create_db_sem(char* db_name, int sem_num) {
     return sem_id;
 }
 
+// [WARN]: Just save shared memory to file 
 int core_save_db(db_context* db_context, char* save_path){
     // 0. Save shared memory id
     int shm_id = db_context->db_shm_id;
@@ -154,6 +156,7 @@ int core_save_db(db_context* db_context, char* save_path){
     return result;
 }
 
+// TODO: Implement after main logic of NODES DATABASE CORE
 int core_load_db(db_context* db_context, char* load_path){
     // 1. Open file
     FILE* file = fopen(load_path, "rb");
@@ -173,6 +176,7 @@ int core_load_db(db_context* db_context, char* load_path){
     return SUCCESS;
 }
 
+// TODO: Think about implementation of this function
 int core_resize_db_shm(db_context* db_context, int bytes_sz){
     // 0. Save shared memory id
     int shm_id = db_context->db_shm_id;
@@ -202,6 +206,9 @@ int core_destroy_db(db_context* db_context){
 
 
 int core_attach_db(db_context* db_context){
+    if(db_context->mem_ptr != NULL)
+        return SUCCESS;
+
     if(db_context->mem_ptr == NULL){
         // 1. Attach database
         db_context->mem_ptr = shmat(db_context->db_shm_id, NULL, 0);
@@ -253,9 +260,6 @@ int core_write_db(db_context* db_context, char* data){
             memcpy(ptr, data, data_sz);
         else
             memcpy(ptr, data, mem_sz);
-
-        // 4. End transaction
-        core_detach_db(db_context);
     }
     else {
         error("Can't write to DB");
@@ -265,13 +269,226 @@ int core_write_db(db_context* db_context, char* data){
     return SUCCESS;
 }
 
-int core_read_db(db_context* db_context, char* data){
+int core_check_magic(db_context* db_context){
+    if(db_context == NULL) 
+        return FAILURE;
+    
+    if(core_attach_db(db_context) == SUCCESS){
+        char data[4];
+        core_read_db(db_context, data, 0, 4);
+
+        info("Trying to read MAGIC from DB");
+
+        if(data[0] == MAGIC_CH_1 &&
+         data[1] == MAGIC_CH_2 &&
+         data[2] == MAGIC_CH_3){
+            info("MAGIC was found in DB");
+            return SUCCESS;
+         }
+        else{
+            warning("MAGIC not found in DB");
+            return FAILURE;
+        }
+    }
+    else{
+        error("Can't write NODE to DB");
+        return FAILURE;
+    }
+
+    return SUCCESS;
+}
+
+int core_init_sys_info(db_context* db_context){
+    if(db_context == NULL) 
+        return FAILURE;
+    
+    if(core_attach_db(db_context) == SUCCESS){
+        if(core_check_magic(db_context)){
+            warning("SYSTEM_INFO was already initialized");
+            return SUCCESS;
+        }
+        
+        char* ptr = db_context->mem_ptr;
+        time_t curr_tm = time(0);
+        db_sys_info sys_info = { "kra", DEFAULT_DB_SIZE, 0, 0, curr_tm, curr_tm};
+        memcpy(ptr, (char*) &sys_info, sizeof(db_sys_info));
+        info("SYSTEM_INFO was initialized");
+    }
+    else{
+        error("Can't write NODE to DB");
+        return FAILURE;
+    }
+
+    return SUCCESS;
+}
+
+int core_write_sys_info(db_context* db_context, db_sys_info sys_info){
+    if(db_context == NULL) 
+        return FAILURE;
+    
+    if(core_attach_db(db_context) == SUCCESS){
+        char* ptr = db_context->mem_ptr;
+        memcpy(ptr, &sys_info, sizeof(db_sys_info));
+        info("SYSTEM_INFO was updated successfully");
+    }
+    else{
+        error("Can't write NODE to DB");
+        return FAILURE;
+    }
+
+    return SUCCESS;
+}
+
+
+int core_read_sys_info(db_context* db_context, db_sys_info* sys_info){
+    if(sys_info == NULL) 
+        return FAILURE;
+    if(db_context == NULL) 
+        return FAILURE;
+    
+    if(core_attach_db(db_context) == SUCCESS){
+        core_read_db(db_context, (char*) sys_info, 0, sizeof(db_sys_info));
+    }
+    else{
+        error("Can't write NODE to DB");
+        return FAILURE;
+    }
+
+    return SUCCESS;
+}
+
+int core_write_node_db(db_context* db_context, nd* node){
+    if(core_attach_db(db_context) == SUCCESS){
+        db_sys_info sys_info = {};
+        core_read_sys_info(db_context, &sys_info);
+
+        char* ptr = db_context->mem_ptr;
+        ptr += NODES_OFFSET;
+
+        nd temp_node = {};
+        for(int i = 0; i < sys_info.db_cnt_nodes; ++i) {
+            core_read_node_db(db_context, i, &temp_node);
+            ptr += sizeof(int) * 3 + temp_node.data_sz;
+        }
+
+        // 3. Copy data to memory
+        info("Write data to DB");
+        memcpy(ptr, &node->node_id, sizeof(int));
+        ptr += sizeof(int);
+        memcpy(ptr, &node->data_type, sizeof(int));
+        ptr += sizeof(int);
+        memcpy(ptr, &node->data_sz, sizeof(int));
+        ptr += sizeof(int);
+        memcpy(ptr, node->data, node->data_sz);
+
+        ++sys_info.db_cnt_nodes;
+        sys_info.db_last_modified = time(0);
+        core_write_sys_info(db_context, sys_info);
+    }
+    else{
+        error("Can't write NODE to DB");
+        return FAILURE;
+    }
+
+    return SUCCESS;
+}
+
+int core_write_edge_db(db_context* db_context, edge* edges){
+    if(core_attach_db(db_context) == SUCCESS){
+        db_sys_info sys_info = {};
+        core_read_sys_info(db_context, &sys_info);
+
+        char* ptr = db_context->mem_ptr;
+        ptr += DB_SYS_INFO_OFFSET + sizeof(edge) * sys_info.db_cnt_edges;
+
+        memcpy(ptr,(char*) edges, sizeof(edge));
+
+        ++sys_info.db_cnt_edges;
+        sys_info.db_last_modified = time(0);
+        core_write_sys_info(db_context, sys_info);
+    }
+    else{
+        error("Can't write NODE to DB");
+        return FAILURE;
+    }
+
+    return SUCCESS;
+}
+
+int core_read_db(db_context* db_context, char* data, int ptr_start, int size){
+    if(data == NULL){
+        error("Data must be allocated before READ");
+        return FAILURE;
+    }
+    
     // 1. Attach database
     if (core_attach_db(db_context) == SUCCESS) {
-        // Some actions
-    
-        // 2. Detach database
-        core_detach_db(db_context);
+        char* ptr = db_context->mem_ptr;
+        // 2. Read Memory 
+        memcpy(data, ptr + ptr_start, size);
+    }
+    else{
+        error("Can't read from DB");
+        return FAILURE;
+    }
+
+    return SUCCESS;
+}
+
+int core_read_node_db(db_context* db_context, int id, nd* node){
+    if (core_attach_db(db_context) == SUCCESS) {      
+        db_sys_info sys_info = {};
+        core_read_sys_info(db_context, &sys_info);
+
+        node->data = malloc(TEMP_SIZE);
+
+        char* ptr = db_context->mem_ptr + NODES_OFFSET;
+        for(int i = 0; i < id + 1; ++i){
+            memcpy(&node->node_id, ptr, sizeof(int));
+            ptr += sizeof(int);
+            #ifdef DEBUG
+                printf("[DBG]:> ID: %d\n", node->node_id);
+            #endif
+            memcpy(&node->data_type, ptr, sizeof(int));
+            ptr += sizeof(int);
+            #ifdef DEBUG
+                printf("[DBG]:> TYPE: %d\n", node->data_type);
+            #endif
+            memcpy(&node->data_sz, ptr, sizeof(int));
+            ptr += sizeof(int);
+            #ifdef DEBUG
+                printf("[DBG]:> SIZE: %d\n", node->data_sz);
+            #endif
+            memcpy(node->data, ptr, node->data_sz);
+            ((char*) node->data)[node->data_sz] = '\0';
+            #ifdef DEBUG
+                printf("ID: %s\n", (char*) node->data);
+            #endif
+            ptr += node->data_sz;
+        }
+    }
+    else{
+        error("Can't read from DB");
+        return FAILURE;
+    }
+
+    return SUCCESS;
+}
+
+int core_read_edge_db(db_context* db_context, int id, edge* edge){
+    if (core_attach_db(db_context) == SUCCESS) {      
+        db_sys_info sys_info = {};
+        core_read_sys_info(db_context, &sys_info);
+
+        char* ptr = db_context->mem_ptr + NODES_OFFSET;
+        for(int i = 0; i < id + 1; ++i){
+            memcpy(edge, ptr, sizeof(pair));
+            ptr += sizeof(pair);
+        }
+    }
+    else{
+        error("Can't read from DB");
+        return FAILURE;
     }
 
     return SUCCESS;

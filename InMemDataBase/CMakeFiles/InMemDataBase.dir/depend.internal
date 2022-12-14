@@ -8,12 +8,14 @@ InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core.c.o
  InMemDataBase/inc/core_db.h
  InMemDataBase/inc/global.h
  InMemDataBase/inc/log.h
+ InMemDataBase/inc/node.h
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/core_db.c.o
  /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/src/core_db.c
  InMemDataBase/inc/colors.h
  InMemDataBase/inc/core_db.h
  InMemDataBase/inc/global.h
  InMemDataBase/inc/log.h
+ InMemDataBase/inc/node.h
 InMemDataBase/CMakeFiles/InMemDataBase.dir/src/log.c.o
  /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/InMemDataBase/src/log.c
  InMemDataBase/inc/colors.h

@@ -6,20 +6,22 @@
 typedef struct node_list nd_list;
 typedef struct node nd;
 
-int node_counter = 0;
+static int node_counter = 0;
 
 typedef struct pair{
     int second;
     int first;
 } pair;
 
+typedef pair edge;
+
 // 1. Node strcuture
 typedef struct node {
     int data_type;
     int node_id;
     
-    void* data;
     int data_sz;
+    void* data;
 } nd;
 
 // 2. Universal node list structure
@@ -29,16 +31,20 @@ typedef struct node_list{
 } nd_list;
 
 // 3. All nodes in graph
-nd_list all_nodes = {NULL, NULL};
+static nd_list all_nodes = {NULL, NULL};
 // 4. Edges in graph
-nd_list edges = {NULL, NULL};
+static nd_list edges = {NULL, NULL};
 
 // 5. Functions
 nd_list* create_list_node();
-int delete_node(nd* node);
+
 nd* create_node();
+int delete_node(nd* node);
 
 int display_node(nd* node);
 char* serialize_node(nd* node);
+
+void itoa(int n, char s[]);
+void reverse(char s[]);
 
 #endif

@@ -32,4 +32,6 @@ void delimiter(char ch, int val);
 // 5. Inner error function
 void inner_error();
 
+char *time_to_ascii(const time_t time);
+
 #endif

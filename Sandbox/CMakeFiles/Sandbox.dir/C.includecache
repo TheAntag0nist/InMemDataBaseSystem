@@ -10,14 +10,6 @@
 cmd.h
 -
 
-/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/Sandbox/src/main.c
-stdio.h
-/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/Sandbox/src/stdio.h
-core.h
-/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/Sandbox/src/core.h
-cmd.h
-/home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem/Sandbox/src/cmd.h
-
 InMemDataBase/inc/colors.h
 stdio.h
 InMemDataBase/inc/stdio.h
@@ -32,6 +24,8 @@ log.h
 
 InMemDataBase/inc/core_db.h
 global.h
+-
+node.h
 -
 log.h
 -
@@ -62,6 +56,12 @@ InMemDataBase/inc/log.h
 global.h
 -
 colors.h
+-
+
+InMemDataBase/inc/node.h
+global.h
+-
+log.h
 -
 
 Sandbox/inc/cmd.h
