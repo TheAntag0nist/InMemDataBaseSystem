@@ -29,6 +29,7 @@ void create_node_cmd();
 void delete_node_cmd();
 void link_node_cmd();
 void find_node_cmd();
+void get_edge_cmd();
 
 
 #endif

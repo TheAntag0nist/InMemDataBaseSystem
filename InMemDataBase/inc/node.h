@@ -6,7 +6,7 @@
 typedef struct node_list nd_list;
 typedef struct node nd;
 
-static int node_counter = 0;
+extern int node_counter;
 
 typedef struct pair{
     int second;

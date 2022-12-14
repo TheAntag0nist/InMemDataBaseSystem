@@ -29,6 +29,10 @@ db_context create_db_context(char* db_name, int db_uid){
 
 int core_connect_db(char* db_name, int db_uid, db_context* db_context){
     key_t key = ftok(db_name, db_uid);
+    if(key == IPC_FAIL){
+        warning("Incorrect key");
+        return FAILURE;
+    }
     printf("KEY: %d\n", key);
 
     int shm_id = shmget(key, 0, 0666);
@@ -56,6 +60,10 @@ int core_connect_db_sem(char* db_name, int db_uid){
 int core_is_exist_db_shm(char* db_name, int db_uid){
     // 1. Create unique key
     key_t key = ftok(db_name, db_uid);
+    if(key == IPC_FAIL){
+        warning("Incorrect key");
+        return FAILURE;
+    }
 
     info("Is database already exist?");
     
@@ -74,6 +82,10 @@ int core_is_exist_db_shm(char* db_name, int db_uid){
 int core_create_db_shm(char* db_name, int db_uid){
     // 1. Create unique key
     key_t key = ftok(db_name, db_uid);
+    if(key == IPC_FAIL){
+        warning("Incorrect key");
+        return FAILURE;
+    }
     printf("KEY: %d\n", key);
 
     // 2. Create shared memory 
@@ -103,6 +115,10 @@ int core_create_db_sem(char* db_name, int sem_num) {
 
     // 4. Create unique key
     key_t key = ftok(path, sem_num);
+    if(key == IPC_FAIL){
+        warning("Incorrect key");
+        return FAILURE;
+    }
     int sem_id = semget(key, sem_num, IPC_CREAT | 0666);
 
     // 5. Check id
@@ -480,7 +496,7 @@ int core_read_edge_db(db_context* db_context, int id, edge* edge){
         db_sys_info sys_info = {};
         core_read_sys_info(db_context, &sys_info);
 
-        char* ptr = db_context->mem_ptr + NODES_OFFSET;
+        char* ptr = db_context->mem_ptr + DB_SYS_INFO_OFFSET;
         for(int i = 0; i < id + 1; ++i){
             memcpy(edge, ptr, sizeof(pair));
             ptr += sizeof(pair);

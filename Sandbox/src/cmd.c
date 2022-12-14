@@ -42,6 +42,21 @@ void main_loop(){
             continue;
         }
 
+        if(!strcmp(command, "link_node")){
+            link_node_cmd();
+            continue;
+        }
+
+        if(!strcmp(command, "get_edge")){
+            get_edge_cmd();
+            continue;
+        }
+
+        if(!strcmp(command, "get_near_nodes")){
+            get_near_nodes_cmd();
+            continue;
+        }
+
         if(!strcmp(command, "get_near_nodes")){
             get_near_nodes_cmd();
             continue;
@@ -74,6 +89,7 @@ void help(){
     printf("\tfind_node - find node command\n");
     printf("\tget_near_nodes - get near nodes command\n");
     printf("\tget_system_info - get database system info command\n");
+    printf("\tget_edge - get edge command\n");
 }
 
 void create_node_cmd(){
@@ -85,6 +101,10 @@ void create_node_cmd(){
     info("COMMAND -> Create node");
     printf("\tEnter node data: ");
     scanf("%s", temp);
+
+    db_sys_info sys_info = {};
+    get_database_system_info(&context, &sys_info);
+    node_counter = sys_info.db_cnt_nodes;
 
     nd* created_node = create_node();
     created_node->data_sz = strlen(temp) + 1;
@@ -118,6 +138,11 @@ void open_database_cmd(){
     if(res == SUCCESS){
         info("Success!");
         flag_db_enabled = true;
+
+        get_system_info();
+        db_sys_info sys_info = {};
+        get_database_system_info(&context, &sys_info);
+        node_counter = sys_info.db_cnt_nodes;
     }
     else{
         error("Faillure!");
@@ -161,7 +186,19 @@ void display_node_cmd(){
     printf("\tEnter node ID: ");
     scanf("%d", &id);
 
-    
+    db_sys_info sys_info = {};
+    get_database_system_info(&context, &sys_info);
+
+    if(id >= sys_info.db_cnt_nodes){
+        warning("Incorrect NODE ID");
+        return;
+    }
+
+    nd node = {};
+    search_node(&context, id, &node);
+    display_node(&node);
+    if(node.data != NULL)
+        free(node.data);
 }
 
 void delete_node_cmd(){
@@ -223,11 +260,45 @@ void find_node_cmd(){
     printf("\tEnter node ID: ");
     scanf("%d", &id);
 
+    db_sys_info sys_info = {};
+    get_database_system_info(&context, &sys_info);
+
+    if(id >= sys_info.db_cnt_nodes){
+        warning("Incorrect NODE ID");
+        return;
+    }
+
     nd node = {0 ,0 , 0, 0};
     search_node(&context, id, &node);
     display_node(&node);
     if(node.data != 0)
         free(node.data);
+}
+
+void get_edge_cmd(){
+    if(!flag_db_enabled){
+        error("Database is not enabled");
+        return;
+    }
+
+    int id = 0;    
+    info("COMMAND -> Get near nodes");
+    printf("\tEnter node ID: ");
+    scanf("%d", &id);
+
+    db_sys_info sys_info = {};
+    get_database_system_info(&context, &sys_info);
+
+    if(id >= sys_info.db_cnt_edges){
+        warning("Incorrect EDGE ID");
+        return;
+    }
+
+    edge edge = {};
+    search_edge(&context, id, &edge);
+
+    printf("\tEDGE NODE ID_1: %d\n", edge.first);
+    printf("\tEDGE NODE ID_2: %d\n", edge.second);
 }
 
 void get_near_nodes_cmd(){
@@ -241,7 +312,21 @@ void get_near_nodes_cmd(){
     printf("\tEnter node ID: ");
     scanf("%d", &id);
 
+    db_sys_info sys_info = {};
+    get_database_system_info(&context, &sys_info);
 
+    if(id >= sys_info.db_cnt_nodes){
+        warning("Incorrect NODE ID");
+        return;
+    }
+
+    edge edge_data = {};
+    for(int i = 0; i < sys_info.db_cnt_edges; ++i){
+        search_edge(&context, i, &edge_data);
+        if(edge_data.first == id || edge_data.second == id){
+            printf("EDGE: %d <-> %d\n", edge_data.first, edge_data.second);
+        }
+    }
 }
 
 void get_system_info(){

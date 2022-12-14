@@ -1,5 +1,7 @@
 #include <node.h>
 
+int node_counter = 0;
+
 nd_list* create_list_node(){
     // 1. Node data
     nd_list* init_list_nd = malloc(sizeof(nd_list));
