@@ -24,7 +24,7 @@ void main_loop(){
 
         if(!strcmp(command, "create_database")){
             create_database_cmd();
-            continue;;
+            continue;
         }
 
         if(!strcmp(command, "open_database")){
