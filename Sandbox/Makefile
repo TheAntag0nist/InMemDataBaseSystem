@@ -125,6 +125,33 @@ Sandbox/fast:
 	cd /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem && $(MAKE) -f Sandbox/CMakeFiles/Sandbox.dir/build.make Sandbox/CMakeFiles/Sandbox.dir/build
 .PHONY : Sandbox/fast
 
+src/cmd.o: src/cmd.c.o
+
+.PHONY : src/cmd.o
+
+# target to build an object file
+src/cmd.c.o:
+	cd /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem && $(MAKE) -f Sandbox/CMakeFiles/Sandbox.dir/build.make Sandbox/CMakeFiles/Sandbox.dir/src/cmd.c.o
+.PHONY : src/cmd.c.o
+
+src/cmd.i: src/cmd.c.i
+
+.PHONY : src/cmd.i
+
+# target to preprocess a source file
+src/cmd.c.i:
+	cd /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem && $(MAKE) -f Sandbox/CMakeFiles/Sandbox.dir/build.make Sandbox/CMakeFiles/Sandbox.dir/src/cmd.c.i
+.PHONY : src/cmd.c.i
+
+src/cmd.s: src/cmd.c.s
+
+.PHONY : src/cmd.s
+
+# target to generate assembly for a file
+src/cmd.c.s:
+	cd /home/antag0nist/Programming/SysProg/curs_4/InMemDataBaseSystem && $(MAKE) -f Sandbox/CMakeFiles/Sandbox.dir/build.make Sandbox/CMakeFiles/Sandbox.dir/src/cmd.c.s
+.PHONY : src/cmd.c.s
+
 src/main.o: src/main.c.o
 
 .PHONY : src/main.o
@@ -161,6 +188,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Sandbox"
+	@echo "... src/cmd.o"
+	@echo "... src/cmd.i"
+	@echo "... src/cmd.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

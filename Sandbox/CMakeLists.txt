@@ -16,6 +16,7 @@ include_directories(${Sandbox_SOURCE_DIR}/src)
 # Source
 set(SOURCE 
     ${Sandbox_SOURCE_DIR}/src/main.c
+    ${Sandbox_SOURCE_DIR}/src/cmd.c
 )
 
 # Project Library

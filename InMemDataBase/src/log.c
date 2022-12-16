@@ -134,7 +134,7 @@ void delimiter(char ch, int val){
 // 10. Default inner error message
 void inner_error(){
     printf(BOLD F_RED);
-    printf("[ERRNO]:> ");
+    printf("[ERRNO] ");
 
     #ifdef unix
         //reset_color();
@@ -142,4 +142,8 @@ void inner_error(){
     #endif
     
     printf("last_error = %d\n", errno);
+}
+
+char *time_to_ascii(const time_t time){
+    return ctime(&time);
 }

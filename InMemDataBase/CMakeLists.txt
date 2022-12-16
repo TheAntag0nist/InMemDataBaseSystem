@@ -13,6 +13,7 @@ include_directories(${InMemDataBase_SOURCE_DIR}/src)
 set(SOURCE 
     ${InMemDataBase_SOURCE_DIR}/src/core_db.c
     ${InMemDataBase_SOURCE_DIR}/src/core.c
+    ${InMemDataBase_SOURCE_DIR}/src/node.c
     ${InMemDataBase_SOURCE_DIR}/src/log.c
 )
 
